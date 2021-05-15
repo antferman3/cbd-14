@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,46 +21,15 @@ public class Pcr {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected Integer id;
     
-    @ManyToOne
-    public Paciente pacientePcrId;
-    
     @Column(name="resultado")
     private String resultado;
     
     @Column(name="fecha_pcr")
     private Date fechaPcr;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Paciente getPacientePcrId() {
-		return pacientePcrId;
-	}
-
-	public void setPacientePcrId(Paciente pacientePcrId) {
-		this.pacientePcrId = pacientePcrId;
-	}
-
-	public String getResultado() {
-		return resultado;
-	}
-
-	public void setResultado(String resultado) {
-		this.resultado = resultado;
-	}
-
-	public Date getFechaPcr() {
-		return fechaPcr;
-	}
-
-	public void setFechaPcr(Date fechaPcr) {
-		this.fechaPcr = fechaPcr;
-	}
+    
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
 
 	@Override
 	public int hashCode() {
@@ -67,7 +37,7 @@ public class Pcr {
 		int result = 1;
 		result = prime * result + ((fechaPcr == null) ? 0 : fechaPcr.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((pacientePcrId == null) ? 0 : pacientePcrId.hashCode());
+		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
 		result = prime * result + ((resultado == null) ? 0 : resultado.hashCode());
 		return result;
 	}
@@ -91,10 +61,10 @@ public class Pcr {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (pacientePcrId == null) {
-			if (other.pacientePcrId != null)
+		if (paciente == null) {
+			if (other.paciente != null)
 				return false;
-		} else if (!pacientePcrId.equals(other.pacientePcrId))
+		} else if (!paciente.equals(other.paciente))
 			return false;
 		if (resultado == null) {
 			if (other.resultado != null)
@@ -104,23 +74,55 @@ public class Pcr {
 		return true;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
+	}
+
+	public Date getFechaPcr() {
+		return fechaPcr;
+	}
+
+	public void setFechaPcr(Date fechaPcr) {
+		this.fechaPcr = fechaPcr;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
 	@Override
 	public String toString() {
-		return "Pcr [id=" + id + ", pacientePcrId=" + pacientePcrId + "]";
+		return "Pcr [id=" + id + ", resultado=" + resultado + ", fechaPcr=" + fechaPcr + ", paciente=" + paciente + "]";
+	}
+
+	public Pcr(Integer id, String resultado, Date fechaPcr, Paciente paciente) {
+		super();
+		this.id = id;
+		this.resultado = resultado;
+		this.fechaPcr = fechaPcr;
+		this.paciente = paciente;
 	}
 
 	public Pcr() {
 		super();
 	}
-
-	public Pcr(Integer id, Paciente pacientePcrId, String resultado, Date fechaPcr) {
-		super();
-		this.id = id;
-		this.pacientePcrId = pacientePcrId;
-		this.resultado = resultado;
-		this.fechaPcr = fechaPcr;
-	}
-
+	
 	
 
     

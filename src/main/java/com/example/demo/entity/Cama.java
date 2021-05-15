@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +16,7 @@ public class Cama {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected Integer id;
-
-    @OneToOne
-    private Paciente pacienteCamaId;
+    protected Integer id; 
     
     @Column(name="fecha_ingreso")
     private Date fechaIngreso;
@@ -33,20 +30,25 @@ public class Cama {
     @Column(name="hospital")
     private String hospital;
 
+	public Cama(Integer id, Date fechaIngreso, Date fechaAlta, String estado, String hospital) {
+		super();
+		this.id = id;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaAlta = fechaAlta;
+		this.estado = estado;
+		this.hospital = hospital;
+	}
+
+	public Cama() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Paciente getPacienteCamaId() {
-		return pacienteCamaId;
-	}
-
-	public void setPacienteCamaId(Paciente pacienteCamaId) {
-		this.pacienteCamaId = pacienteCamaId;
 	}
 
 	public Date getFechaIngreso() {
@@ -90,7 +92,6 @@ public class Cama {
 		result = prime * result + ((fechaIngreso == null) ? 0 : fechaIngreso.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((pacienteCamaId == null) ? 0 : pacienteCamaId.hashCode());
 		return result;
 	}
 
@@ -128,34 +129,14 @@ public class Cama {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (pacienteCamaId == null) {
-			if (other.pacienteCamaId != null)
-				return false;
-		} else if (!pacienteCamaId.equals(other.pacienteCamaId))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Cama [id=" + id + ", pacienteCamaId=" + pacienteCamaId + "]";
+		return "Cama [id=" + id + ", fechaIngreso=" + fechaIngreso + ", fechaAlta=" + fechaAlta + ", estado=" + estado
+				+ ", hospital=" + hospital + "]";
 	}
 
-	public Cama() {
-		super();
-	}
-
-	public Cama(Integer id, Paciente pacienteCamaId, Date fechaIngreso, Date fechaAlta, String estado,
-			String hospital) {
-		super();
-		this.id = id;
-		this.pacienteCamaId = pacienteCamaId;
-		this.fechaIngreso = fechaIngreso;
-		this.fechaAlta = fechaAlta;
-		this.estado = estado;
-		this.hospital = hospital;
-	}
-
-	
     
 }

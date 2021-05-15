@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,6 +43,14 @@ public class Paciente {
     
     @Column(name="dni")
     private String dni;
+    
+    @OneToOne
+    @JoinColumn(name = "cama")
+    private Cama cama;
+    
+    @OneToOne
+    @JoinColumn(name = "vacuna")
+    private Vacuna vacuna;
 
 	public Integer getId() {
 		return id;
@@ -122,10 +132,55 @@ public class Paciente {
 		this.dni = dni;
 	}
 
+	public Cama getCama() {
+		return cama;
+	}
+
+	public void setCama(Cama cama) {
+		this.cama = cama;
+	}
+
+	public Vacuna getVacuna() {
+		return vacuna;
+	}
+
+	public void setVacuna(Vacuna vacuna) {
+		this.vacuna = vacuna;
+	}
+
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", edad=" + edad + ", peso=" + peso + ", ciudad=" + ciudad + ", provincia="
+				+ provincia + ", comunidad=" + comunidad + ", paisOrigen=" + paisOrigen + ", patologias=" + patologias
+				+ ", genero=" + genero + ", dni=" + dni + ", cama=" + cama + ", vacuna=" + vacuna + "]";
+	}
+
+	public Paciente(Integer id, Integer edad, Float peso, String ciudad, String provincia, String comunidad,
+			String paisOrigen, String patologias, String genero, String dni, Cama cama, Vacuna vacuna) {
+		super();
+		this.id = id;
+		this.edad = edad;
+		this.peso = peso;
+		this.ciudad = ciudad;
+		this.provincia = provincia;
+		this.comunidad = comunidad;
+		this.paisOrigen = paisOrigen;
+		this.patologias = patologias;
+		this.genero = genero;
+		this.dni = dni;
+		this.cama = cama;
+		this.vacuna = vacuna;
+	}
+
+	public Paciente() {
+		super();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cama == null) ? 0 : cama.hashCode());
 		result = prime * result + ((ciudad == null) ? 0 : ciudad.hashCode());
 		result = prime * result + ((comunidad == null) ? 0 : comunidad.hashCode());
 		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
@@ -136,6 +191,7 @@ public class Paciente {
 		result = prime * result + ((patologias == null) ? 0 : patologias.hashCode());
 		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
 		result = prime * result + ((provincia == null) ? 0 : provincia.hashCode());
+		result = prime * result + ((vacuna == null) ? 0 : vacuna.hashCode());
 		return result;
 	}
 
@@ -148,6 +204,11 @@ public class Paciente {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
+		if (cama == null) {
+			if (other.cama != null)
+				return false;
+		} else if (!cama.equals(other.cama))
+			return false;
 		if (ciudad == null) {
 			if (other.ciudad != null)
 				return false;
@@ -198,33 +259,15 @@ public class Paciente {
 				return false;
 		} else if (!provincia.equals(other.provincia))
 			return false;
+		if (vacuna == null) {
+			if (other.vacuna != null)
+				return false;
+		} else if (!vacuna.equals(other.vacuna))
+			return false;
 		return true;
 	}
+
 	
-	public Paciente() {
-		super();
-	}
-    
-
-	public Paciente(Integer id, Integer edad, Float peso, String ciudad, String provincia, String comunidad,
-			String paisOrigen, String patologias, String genero, String dni) {
-		super();
-		this.id = id;
-		this.edad = edad;
-		this.peso = peso;
-		this.ciudad = ciudad;
-		this.provincia = provincia;
-		this.comunidad = comunidad;
-		this.paisOrigen = paisOrigen;
-		this.patologias = patologias;
-		this.genero = genero;
-		this.dni = dni;
-	}
-
-	@Override
-	public String toString() {
-		return "Paciente [id=" + id + ", dni=" + dni + "]";
-	}
 
 
     
