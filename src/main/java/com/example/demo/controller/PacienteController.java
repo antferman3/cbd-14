@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +20,15 @@ public class PacienteController {
 	@Autowired
 	private PacienteRepository pacienteRepository;
 	
-//	@PostMapping(path="/add") // Map ONLY POST Requests
-//    public @ResponseBody String addNewUser (@RequestParam String name) {
-//      // @ResponseBody means the returned String is the response, not a view name
-//      // @RequestParam means it is a parameter from the GET or POST request
-//      return "Saved";
-//    }
-	
-	@GetMapping(path="/pacientes")
-	public @ResponseBody Iterable<Paciente> getAllPacientes(){
-		return pacienteRepository.findAll();
+	@RequestMapping(path = "/a")
+    public String index() {
+
+        return "index.html";
+    }
+	@GetMapping(path="/pacientes",produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public  List<Paciente> getAllPacientes(){
+		return (List<Paciente>) pacienteRepository.findAll();
 	}
 
 }

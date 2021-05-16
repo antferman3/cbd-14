@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +29,7 @@ public class Cama {
     
     @Column(name="hospital")
     private String hospital;
+    
 
 	public Cama(Integer id, Date fechaIngreso, Date fechaAlta, String estado, String hospital) {
 		super();

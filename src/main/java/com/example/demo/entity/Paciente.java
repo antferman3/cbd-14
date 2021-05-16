@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 @Entity
 @Table(name="paciente")
@@ -45,7 +46,8 @@ public class Paciente {
     private String dni;
     
     @OneToOne
-    @JoinColumn(name = "cama")
+    @Valid
+    @JoinColumn(name = "cama", referencedColumnName = "id")
     private Cama cama;
     
     @OneToOne

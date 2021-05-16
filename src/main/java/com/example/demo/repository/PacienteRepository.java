@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.example.demo.entity.Paciente;
 
-public interface PacienteRepository extends CrudRepository<Paciente,Long>{
+public interface PacienteRepository extends CrudRepository<Paciente,Integer>{
 
 }
