@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="pcr")
 public class Pcr {
@@ -28,7 +26,7 @@ public class Pcr {
     private Date fechaPcr;
     
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "paciente")
     private Paciente paciente;
 
 	@Override
