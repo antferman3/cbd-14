@@ -19,7 +19,7 @@ public class CamaController {
 	
 	
 	@GetMapping(path="/camas")
-	public @ResponseBody Iterable<Cama> getAllCamas(){
+	public @ResponseBody Iterable<Cama> listBed(){
 		return camaRepository.findAll();
 	}
 

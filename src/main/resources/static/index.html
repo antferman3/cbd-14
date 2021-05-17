@@ -23,8 +23,8 @@
 
                 $("ul#output > li").remove();
 
-                $.each(data, function (value) {
-                    $("#output").append('<li>' + value+'</li>');
+                $.each(data, function (key,value) {
+                    $("#output").append('<li>' + value['dni']+'</li>');
                 });
             });
         });
