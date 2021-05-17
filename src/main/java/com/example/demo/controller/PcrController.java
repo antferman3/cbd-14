@@ -21,24 +21,24 @@ public class PcrController {
 		return pcrRepository.findAll();
 	}
 	
-	@GetMapping(path="positivos/ciudad/{ciudad}")
-	public @ResponseBody Integer getPositivosPorCiudad(@PathVariable("ciudad")String ciudad) {
-		return pcrRepository.getNumeroDePositivosPorCiudad(ciudad);
-	}
-	
-	@GetMapping(path="positivos/provincia/{provincia}")
-	public @ResponseBody Integer getPositivosPorProvincia(@PathVariable("provincia")String provincia) {
-		return pcrRepository.getNumeroDePositivosPorProvincia(provincia);
-	}
-	
-	@GetMapping(path="positivos/extranjeros")
-	public @ResponseBody Integer getPositivosExtranjeros() {
-		return pcrRepository.getNumeroDePositivosExtranjeros();
-	}
-	
-	@GetMapping(path="positivos/extranjeros/{ciudad}")
-	public @ResponseBody Integer getPositivosExtranjerosPorCiudad(@PathVariable("ciudad")String ciudad) {
-		return pcrRepository.getNumeroDePositivosExtranjerosPorCiudad(ciudad);
-	}
+//	@GetMapping(path="positivos/ciudad/{ciudad}")
+//	public @ResponseBody Integer getPositivosPorCiudad(@PathVariable("ciudad")String ciudad) {
+//		return pcrRepository.getNumeroDePositivosPorCiudad(ciudad);
+//	}
+//	
+//	@GetMapping(path="positivos/provincia/{provincia}")
+//	public @ResponseBody Integer getPositivosPorProvincia(@PathVariable("provincia")String provincia) {
+//		return pcrRepository.getNumeroDePositivosPorProvincia(provincia);
+//	}
+//	
+//	@GetMapping(path="positivos/extranjeros")
+//	public @ResponseBody Integer getPositivosExtranjeros() {
+//		return pcrRepository.getNumeroDePositivosExtranjeros();
+//	}
+//	
+//	@GetMapping(path="positivos/extranjeros/{ciudad}")
+//	public @ResponseBody Integer getPositivosExtranjerosPorCiudad(@PathVariable("ciudad")String ciudad) {
+//		return pcrRepository.getNumeroDePositivosExtranjerosPorCiudad(ciudad);
+//	}
 
 }
