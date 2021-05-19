@@ -38,6 +38,7 @@ public class VacunaController {
 	@Autowired
 	private PacienteRepository pacienteRepository;
 	
+	
 	private static ObjectMapper objectMapper = new ObjectMapper();
 	
 	
