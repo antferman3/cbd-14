@@ -21,12 +21,12 @@ public class PacienteController {
 	@Autowired
 	private PacienteRepository pacienteRepository;
 	
-	@RequestMapping(path = "/")
-    public String index() {
-
-        return "index";
-    }
-	
+//	@RequestMapping(path = "/")
+//    public String index() {
+//
+//        return "index";
+//    }
+//	
 	@ApiOperation(value = "Listar todos los pacientes")
 	@GetMapping(path="/pacientes",produces = "application/json; charset=UTF-8")
 	@ResponseBody
