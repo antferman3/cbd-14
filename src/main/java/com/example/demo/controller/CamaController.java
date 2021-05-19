@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +49,11 @@ public class CamaController {
 	@GetMapping(path="/positivos/planta")
 	public @ResponseBody Integer getPositivosEnPlanta() {
 		return pcrRepository.getPositivosEnPlanta();
+	}
+	
+	@ApiOperation(value = "Listado de hospitales")
+	@GetMapping(path="/hospitales")
+	public @ResponseBody List<String> getHospitales() {
+		return camaRepository.getHospitales();
 	}
 }

@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Vacuna {
     private Integer dosis;
     
     @Column(name="fecha_vacunacion")
-    private Date fechaVacunacion;
+    private LocalDate fechaVacunacion;
     
     @Column(name="ciudad_vacuna")
     private String ciudadVacuna;
@@ -55,12 +56,12 @@ public class Vacuna {
 		this.dosis = dosis;
 	}
 
-	public Date getFechaVacunacion() {
+	public LocalDate getFechaVacunacion() {
 		return fechaVacunacion;
 	}
 
-	public void setFechaVacunacion(Date fechaVacunacion) {
-		this.fechaVacunacion = fechaVacunacion;
+	public void setFechaVacunacion(LocalDate fecha) {
+		this.fechaVacunacion = fecha;
 	}
 
 	public String getCiudadVacuna() {
@@ -124,7 +125,7 @@ public class Vacuna {
 		super();
 	}
 
-	public Vacuna(Integer id, String nombre, Integer dosis, Date fechaVacunacion,
+	public Vacuna(Integer id, String nombre, Integer dosis, LocalDate fechaVacunacion,
 			String ciudadVacuna) {
 		super();
 		this.id = id;

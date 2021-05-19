@@ -32,5 +32,19 @@ public class PacienteController {
 	public  List<Paciente> getAllPacientes(){
 		return (List<Paciente>) pacienteRepository.findAll();
 	}
+	
+	@ApiOperation(value = "Ciudades de los pacientes")
+	@GetMapping(path="/pacientes/ciudades",produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public  List<String> getCiudades(){
+		return pacienteRepository.getCiudades();
+	}
+	
+	@ApiOperation(value = "Provincias de los pacientes")
+	@GetMapping(path="/pacientes/provincias",produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public  List<String> getProvinicas(){
+		return pacienteRepository.getProvincias();
+	}
 
 }

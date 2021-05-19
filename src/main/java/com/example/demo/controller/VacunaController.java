@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -10,13 +13,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Paciente;
 import com.example.demo.entity.Pcr;
 import com.example.demo.entity.Vacuna;
+import com.example.demo.repository.PacienteRepository;
 import com.example.demo.repository.VacunaRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,21 +35,57 @@ public class VacunaController {
 	@Autowired
 	private VacunaRepository vacunaRepository;
 	
+	@Autowired
+	private PacienteRepository pacienteRepository;
+	
+	private static ObjectMapper objectMapper = new ObjectMapper();
+	
+	
 	@ApiOperation(value = "Listar todas las vacunas")
 	@GetMapping(path="/vacunas")
 	public @ResponseBody Iterable<Vacuna> getAllVacunas(){
 		return vacunaRepository.findAll();
 	}
 	
-	//CAMBIAR VACUNA POR PACIENTE
+	
 	@ApiOperation(value = "Actualizar dosis de la vacunación administrada al paciente")
-	@PostMapping(path="/vacunas/update/{vacunaId}")
+	@PostMapping(path="/vacunas/update/{pacienteId}")
 	@ResponseBody 
-    public Vacuna updateVacuna (@PathVariable("vacunaId") int vacunaId) {
-		Vacuna vacuna = vacunaRepository.findById(vacunaId).get();
+    public Vacuna updateVacuna (@PathVariable("pacienteId") int pacienteId) {
+		Paciente paciente = pacienteRepository.findById(pacienteId).get();
+		Vacuna vacuna = paciente.getVacuna();
 		vacuna.setDosis(vacuna.getDosis()+1);
 		vacunaRepository.save(vacuna);
 		return vacuna;
+    }
+	
+	
+	@ApiOperation(value = "Crear vacuna")
+	@PostMapping(path="/vacunas/create")
+	@ResponseBody 
+    public Vacuna createVacuna (@RequestBody String body) {
+		try {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Vacuna vacuna = new Vacuna();
+            JsonNode jsonNode = objectMapper.readTree(body);
+
+            String nombre = objectMapper.readTree(jsonNode.get("nombre").toString()).asText();
+            Integer dosis = objectMapper.readTree(jsonNode.get("dosis").toString()).asInt();
+            LocalDate fecha = LocalDate.parse((objectMapper.readTree(jsonNode.get("fecha").toString()).asText()), dtf);
+            String ciudad = objectMapper.readTree(jsonNode.get("ciudad_vacuna").toString()).asText();
+
+            vacuna.setNombre(nombre);
+            vacuna.setDosis(dosis);
+            vacuna.setFechaVacunacion(fecha);
+            vacuna.setCiudadVacuna(ciudad);
+            
+
+            vacunaRepository.save(vacuna);
+            return vacuna;
+        } catch (Exception e) {
+            throw (new IllegalArgumentException(e.getMessage()));
+        }
+
     }
 	
 	@ApiOperation(value = "Crear vacuna")
