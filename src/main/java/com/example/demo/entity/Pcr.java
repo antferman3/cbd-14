@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Pcr {
     private String resultado;
     
     @Column(name="fecha_pcr")
-    private Date fechaPcr;
+    private LocalDate fechaPcr;
     
     @ManyToOne
     @JoinColumn(name = "paciente")
@@ -88,11 +89,11 @@ public class Pcr {
 		this.resultado = resultado;
 	}
 
-	public Date getFechaPcr() {
+	public LocalDate getFechaPcr() {
 		return fechaPcr;
 	}
 
-	public void setFechaPcr(Date fechaPcr) {
+	public void setFechaPcr(LocalDate fechaPcr) {
 		this.fechaPcr = fechaPcr;
 	}
 
@@ -109,7 +110,7 @@ public class Pcr {
 		return "Pcr [id=" + id + ", resultado=" + resultado + ", fechaPcr=" + fechaPcr + ", paciente=" + paciente + "]";
 	}
 
-	public Pcr(Integer id, String resultado, Date fechaPcr, Paciente paciente) {
+	public Pcr(Integer id, String resultado, LocalDate fechaPcr, Paciente paciente) {
 		super();
 		this.id = id;
 		this.resultado = resultado;

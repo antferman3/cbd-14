@@ -1,16 +1,24 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Paciente;
 import com.example.demo.entity.Pcr;
+import com.example.demo.entity.Vacuna;
+import com.example.demo.repository.PacienteRepository;
 import com.example.demo.repository.PcrRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +29,38 @@ public class PcrController {
 	
 	@Autowired
 	private PcrRepository pcrRepository;
+	@Autowired
+	private PacienteRepository pacienteRepository;
+	
+	private static ObjectMapper objectMapper = new ObjectMapper();
+	
+	@ApiOperation(value = "Crear pcr")
+	@PostMapping(path="/pcr/create")
+	@ResponseBody 
+    public Pcr createPcr (@RequestBody String body) {
+		try {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Pcr pcr = new Pcr();
+            JsonNode jsonNode = objectMapper.readTree(body);
+
+            String resultado = objectMapper.readTree(jsonNode.get("resultado").toString()).asText();
+            LocalDate fecha = LocalDate.parse((objectMapper.readTree(jsonNode.get("fecha").toString()).asText()), dtf);
+            Integer pacienteId	 = objectMapper.readTree(jsonNode.get("paciente").toString()).asInt();
+            
+            Paciente paciente = pacienteRepository.findById(pacienteId).get();
+
+            pcr.setFechaPcr(fecha);
+            pcr.setPaciente(paciente);
+            pcr.setResultado(resultado);
+            
+
+            pcrRepository.save(pcr);
+            return pcr;
+        } catch (Exception e) {
+            throw (new IllegalArgumentException(e.getMessage()));
+        }
+
+    }
 	
 	@ApiOperation(value = "Listar todas la pcr realizadas")
 	@GetMapping(path="/pcr")
@@ -60,7 +100,7 @@ public class PcrController {
 		return pcrRepository.getNumeroDePositivosExtranjerosPorCiudad(ciudad);
 	}
 	
-	@ApiOperation(value = "Número de positivos que son extranjeros en función de una ciudad")
+	@ApiOperation(value = "Listado de pacientes que se han reinfectado por COVID")
 	@GetMapping(path="/reinfectados/pacientes")
 	public @ResponseBody List<Paciente> getPacientesReinfectados(){
 		return pcrRepository.getPacientesReinfectados();

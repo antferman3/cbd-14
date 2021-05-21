@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Paciente;
 import com.example.demo.entity.Vacuna;
 
+@Repository
 public interface VacunaRepository extends CrudRepository<Vacuna,Integer>{
 	
 	@Query("SELECT avg(paciente.edad) from Paciente paciente INNER JOIN Vacuna vacuna ON vacuna.id = paciente.vacuna")

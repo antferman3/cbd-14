@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Cama;
 
+@Repository
 public interface CamaRepository extends CrudRepository<Cama,Integer>{
 	
 	//Funciona pero solo me devuelve 1 decimal me cago en su puta madre la coja

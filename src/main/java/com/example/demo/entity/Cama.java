@@ -1,13 +1,13 @@
 package com.example.demo.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +19,10 @@ public class Cama {
     protected Integer id; 
     
     @Column(name="fecha_ingreso")
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
     
     @Column(name="fecha_alta")
-    private Date fechaAlta;
+    private LocalDate fechaAlta;
     
     @Column(name="estado")
     private String estado;
@@ -31,7 +31,7 @@ public class Cama {
     private String hospital;
     
 
-	public Cama(Integer id, Date fechaIngreso, Date fechaAlta, String estado, String hospital) {
+	public Cama(Integer id, LocalDate fechaIngreso, LocalDate fechaAlta, String estado, String hospital) {
 		super();
 		this.id = id;
 		this.fechaIngreso = fechaIngreso;
@@ -52,19 +52,19 @@ public class Cama {
 		this.id = id;
 	}
 
-	public Date getFechaIngreso() {
+	public LocalDate getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(LocalDate fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaAlta() {
+	public LocalDate getFechaAlta() {
 		return fechaAlta;
 	}
 
-	public void setFechaAlta(Date fechaAlta) {
+	public void setFechaAlta(LocalDate fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 

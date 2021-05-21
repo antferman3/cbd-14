@@ -45,9 +45,11 @@ public class Paciente {
     @Column(name="dni")
     private String dni;
     
+    @Column(name="estado")
+    private String estado;
+    
     @OneToOne
-    @Valid
-    @JoinColumn(name = "cama", referencedColumnName = "id")
+    @JoinColumn(name = "cama")
     private Cama cama;
     
     @OneToOne
@@ -150,6 +152,13 @@ public class Paciente {
 		this.vacuna = vacuna;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(String estado) {
+		this.estado=estado;
+	}
 	@Override
 	public String toString() {
 		return "Paciente [id=" + id + ", edad=" + edad + ", peso=" + peso + ", ciudad=" + ciudad + ", provincia="
@@ -158,7 +167,7 @@ public class Paciente {
 	}
 
 	public Paciente(Integer id, Integer edad, Float peso, String ciudad, String provincia, String comunidad,
-			String paisOrigen, String patologias, String genero, String dni, Cama cama, Vacuna vacuna) {
+			String paisOrigen, String patologias, String genero, String dni, Cama cama, Vacuna vacuna, String estado) {
 		super();
 		this.id = id;
 		this.edad = edad;
@@ -172,6 +181,7 @@ public class Paciente {
 		this.dni = dni;
 		this.cama = cama;
 		this.vacuna = vacuna;
+		this.estado=estado;
 	}
 
 	public Paciente() {

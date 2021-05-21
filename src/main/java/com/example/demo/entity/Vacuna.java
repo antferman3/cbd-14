@@ -31,6 +31,7 @@ public class Vacuna {
     @Column(name="ciudad_vacuna")
     private String ciudadVacuna;
 
+    
 	public Integer getId() {
 		return id;
 	}
