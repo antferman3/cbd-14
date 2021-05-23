@@ -75,7 +75,7 @@ public class PcrController {
 	@ApiOperation(value = "Número de personas que se han reinfectado")
 	@GetMapping(path="reinfectados")
 	public @ResponseBody Integer getNumeroReinfectados() {
-		return pcrRepository.getNumeroDeReinfectados();
+		return pcrRepository.getPacientesReinfectados().size();
 	}
 	
 	@ApiOperation(value = "Número de positivos en función de la ciudad")
