@@ -92,6 +92,12 @@ public class CamaController {
 		return camaRepository.findAll();
 	}
 	
+	@ApiOperation(value = "Listado de hospitales")
+	@GetMapping(path="/hospitales")
+	public @ResponseBody List<String> getHospitales() {
+		return camaRepository.getHospitales();
+	}
+	
 	@ApiOperation(value = "Ocupación de los hospitales")
 	@GetMapping(path="camas/ocupacion/{hospital}")
 	public @ResponseBody Double getOcupacionDeLosHospitales(@PathVariable("hospital")String hospital) {
@@ -111,9 +117,5 @@ public class CamaController {
 		return pcrRepository.getPositivosEnPlanta();
 	}
 	
-	@ApiOperation(value = "Listado de hospitales")
-	@GetMapping(path="/hospitales")
-	public @ResponseBody List<String> getHospitales() {
-		return camaRepository.getHospitales();
-	}
+
 }
